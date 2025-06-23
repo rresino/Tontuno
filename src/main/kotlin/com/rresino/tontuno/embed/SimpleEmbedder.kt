@@ -1,15 +1,7 @@
-package com.rresino.tontuno
+package com.rresino.tontuno.embed
 
 import kotlin.math.sqrt
 import kotlin.random.Random
-
-/**
- * Interface for text embedding functionality
- */
-interface Embedder {
-    suspend fun embed(text: String): FloatArray
-    fun getDimensions(): Int
-}
 
 /**
  * Simple embedder that creates deterministic embeddings based on text content

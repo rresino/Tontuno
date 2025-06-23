@@ -8,8 +8,23 @@ private val logger = KotlinLogging.logger {}
 fun main() = runBlocking {
     logger.info { "Starting RAG Learning Agent..." }
 
+    // Initialize components with different embedder options
+    println("=== RAG Learning Agent Demo ===\n")
+    println("Choose embedder type:")
+    println("1. Simple Embedder (Fast, basic)")
+    println("2. Sentence Transformers via API (Requires API)")
+    println("3. ONNX Sentence Transformers (Local model)")
+
     // Initialize components
-    val embedder = SimpleEmbedder()
+    // Opción 1: Factory con auto-detección
+    val embedder = EmbedderFactory.createFromEnvironment()
+    // Opción 2: Directo por tipo
+    // val embedder = OllamaEmbedder()
+    // Opción 3: Factory con configuración
+    // val embedder = EmbedderFactory.createEmbedder(
+    //    EmbedderFactory.EmbedderType.OLLAMA,
+    //    mapOf("modelName" to "nomic-embed-text")
+    // )
     val vectorStore = InMemoryVectorStore()
     val ragAgent = RagAgent(embedder, vectorStore)
 
@@ -47,5 +62,9 @@ fun main() = runBlocking {
         println("Q: $query")
         val response = ragAgent.query(query, topK = 2)
         println("A: $response\n")
+        println("---")
     }
+
+    // Show statistics
+    println(ragAgent.getStats())
 }

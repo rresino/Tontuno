@@ -21,9 +21,17 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:2.3.5")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.5")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.5")
+    implementation("io.ktor:ktor-client-logging:2.3.5")
 
     // Vector database (in-memory for simplicity)
     implementation("org.apache.commons:commons-math3:3.6.1")
+
+    // ONNX Runtime for running Sentence Transformers models
+    implementation("com.microsoft.onnxruntime:onnxruntime:1.16.3")
+
+    // Tokenization library
+    implementation("ai.djl:api:0.24.0")
+    implementation("ai.djl.huggingface:tokenizers:0.24.0")
 
     // Logging
     implementation("ch.qos.logback:logback-classic:1.4.11")

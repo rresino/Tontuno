@@ -47,5 +47,5 @@ data class EmbeddedDocument(
 data class SearchResult(
     val document: Document,
     val similarity: Float,
-    val embedding: FloatArray
+    val embedding: FloatArray,
 )

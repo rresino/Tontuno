@@ -1,5 +1,6 @@
 package com.rresino.tontuno
 
+import com.rresino.tontuno.embed.*
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
@@ -67,11 +68,13 @@ class RagAgent(
     suspend fun getStats(): String {
         val docCount = vectorStore.getDocumentCount()
         val dimensions = embedder.getDimensions()
+        val embedderType = embedder::class.simpleName
 
         return """
             📊 RAG Agent Statistics:
             - Documents in knowledge base: $docCount
             - Embedding dimensions: $dimensions
+            - Embedder type: $embedderType
         """.trimIndent()
     }
 
@@ -81,5 +84,12 @@ class RagAgent(
     suspend fun clearKnowledgeBase() {
         logger.info { "Clearing knowledge base" }
         vectorStore.clear()
+    }
+
+    /**
+     * Close resources (important for API-based embedders)
+     */
+    suspend fun close() {
+        embedder.close()
     }
 }
